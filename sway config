@@ -1,0 +1,92 @@
+set $mod Mod4
+set $term alacritty
+
+# =========================
+# LOOK & FEEL
+# =========================
+
+gaps inner 8
+gaps outer 4
+
+default_border pixel 2
+smart_borders on
+
+client.focused          #89b4fa #89b4fa #0b0f1a #cdd6f4 #89b4fa
+client.unfocused        #1e1e2e #1e1e2e #cdd6f4 #1e1e2e #1e1e2e
+client.urgent           #f38ba8 #f38ba8 #ffffff #f38ba8 #f38ba8
+
+# =========================
+# OUTPUT / MONITOR
+# =========================
+output * mode 1920x1080@165Hz
+
+# =========================
+# STARTUP
+# =========================
+
+# wallpaper (clean + sharp)
+exec swaybg -i /home/rdxy/Pictures/wallpaper.png -m fit
+
+# bar
+exec waybar
+
+# terminal startup fastfetch (optional)
+exec alacritty -e fastfetch
+
+# =========================
+# KEYBINDS
+# =========================
+
+# terminal
+bindsym $mod+Return exec alacritty
+
+# launcher
+bindsym Ctrl+$mod+Return exec fuzzel
+
+# close window
+bindsym $mod+q kill
+
+# =========================
+# NEW CONTROLS (AS YOU WANTED)
+# =========================
+
+# FULLSCREEN TOGGLE (Win + T)
+bindsym $mod+t fullscreen toggle
+
+# MINIMIZE (scratchpad) (Win + Y)
+bindsym $mod+y move scratchpad
+
+# show minimized window
+bindsym $mod+Shift+y scratchpad show
+
+# =========================
+# OTHER CONTROLS
+# =========================
+
+bindsym $mod+f floating toggle
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exit
+
+# =========================
+# FOCUS MOVEMENT
+# =========================
+
+bindsym $mod+h focus left
+bindsym $mod+j focus down
+bindsym $mod+k focus up
+bindsym $mod+l focus right
+
+bindsym $mod+Shift+h move left
+bindsym $mod+Shift+j move down
+bindsym $mod+Shift+k move up
+bindsym $mod+Shift+l move right
+
+# =========================
+# WORKSPACES
+# =========================
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
