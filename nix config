@@ -1,0 +1,188 @@
+{ config, pkgs, ... }:
+
+{
+  imports = [
+    ./hardware-configuration.nix
+  ];
+
+  nix.settings.experimental-features = [ "nix-command" "flakes" ];
+
+  # Bootloader
+  boot.loader.systemd-boot.enable = true;
+  boot.loader.efi.canTouchEfiVariables = true;
+  boot.loader.systemd-boot.configurationLimit = 2;
+
+  # Latest kernel
+  boot.kernelPackages = pkgs.linuxPackages_latest;
+
+  networking.hostName = "nixos";
+  networking.networkmanager.enable = true;
+
+  time.timeZone = "America/New_York";
+
+  i18n.defaultLocale = "en_US.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
+  };
+
+  # X11 (needed for Plasma)
+  services.xserver.enable = true;
+
+  # Display manager
+  services.displayManager.sddm.enable = true;
+
+  # KDE Plasma (kept as a fallback)
+  services.desktopManager.plasma6.enable = true;
+
+  # Enable Niri
+  programs.niri.enable = true;
+  programs.sway.enable = true;
+
+  services.xserver.xkb = {
+    layout = "us";
+    variant = "";
+  };
+
+  services.printing.enable = true;
+
+  # Audio
+  services.pulseaudio.enable = false;
+
+  security.rtkit.enable = true;
+
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+  };
+
+  users.users.rdxy = {
+    isNormalUser = true;
+    description = "rdxy";
+    extraGroups = [ "networkmanager" "wheel" ];
+
+    packages = with pkgs; [
+      kdePackages.kate
+    ];
+  };
+
+  programs.firefox.enable = true;
+
+  nixpkgs.config.allowUnfree = true;
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.jetbrains-mono
+    nerd-fonts.symbols-only
+  ];
+
+  environment.systemPackages = with pkgs; [
+    # Existing
+    fastfetch
+    vesktop
+    swww
+
+    # Niri
+    niri
+    rofi
+    waybar
+    mako
+
+    #sway
+    sway
+    foot
+    fuzzel
+    swaybg
+
+    # Terminal
+    alacritty
+
+    # Bar
+    waybar
+
+    # Launcher
+    fuzzel
+
+    # Notifications
+
+    # Wallpaper
+    swaybg
+
+    # Lock / Idle
+    swaylock
+    swayidle
+
+    # Screenshots
+    grim
+    slurp
+
+    # Clipboard
+    wl-clipboard
+
+    # Brightness
+    brightnessctl
+
+    # Audio
+    playerctl
+    pamixer
+
+    # File manager
+    nautilus
+
+    # Terminal file manager
+    yazi
+
+    # System monitor
+    btop
+
+    # Visualizer
+    cava
+
+    # Shell
+    fish
+    starship
+
+    # Fun
+    lavat
+    cmatrix
+    peaclock
+    asciiquarium
+    cbonsai
+    docker
+    ncurses.dev
+    figlet
+    mapscii
+    aalib
+    pipes
+    brave
+    hyfetch
+    peaclock
+    
+
+
+
+
+
+
+
+ 
+
+    # Misc
+    networkmanagerapplet
+    unzip
+    git
+    wget
+    curl
+  ];
+
+  system.stateVersion = "26.05";
+}
