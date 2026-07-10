@@ -29,7 +29,7 @@ output * {
 # =========================
 
 # wallpaper (clean + sharp)
-exec swaybg -i /home/rdxy/Pictures/wallpaper.png -m fit
+exec swaybg -i $HOME/Pictures/wallpaper.png -m fit
 
 # bar
 exec waybar
