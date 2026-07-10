@@ -18,7 +18,11 @@ client.urgent           #f38ba8 #f38ba8 #ffffff #f38ba8 #f38ba8
 # =========================
 # OUTPUT / MONITOR
 # =========================
-output * mode 1920x1080@165Hz
+# Let Sway automatically use the monitor's preferred
+# resolution and refresh rate.
+output * {
+    scale 1
+}
 
 # =========================
 # STARTUP
